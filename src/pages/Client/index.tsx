@@ -1,3 +1,5 @@
+import { Container } from "./styles"
+
 export default function Client() {
-    return <h1>Clientes Page</h1>
+    return <Container>Clientes Page</Container>
 }

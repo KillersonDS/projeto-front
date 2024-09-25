@@ -1,6 +1,6 @@
-// import { Container } from "./styles"
+import { Container } from "./styles"
 
 
-// export default function Stock() {
-//     return <Container>Estoque Page</Container>
-// }
+export default function Stock() {
+    return <Container>Estoque Page</Container>
+}
