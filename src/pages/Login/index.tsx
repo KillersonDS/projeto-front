@@ -12,8 +12,8 @@ import { useAuth } from '../../context/AuthContext';
 import { loginRequest } from '../../service/LoginService';
 
 const loginSchema = z.object({
-    username: z.string().min(5, "Digite seu cpf corretamente"),
-    password: z.string().min(5, "Digite sua data corretamente"),
+    cpf: z.string().min(5, "Digite seu cpf corretamente"),
+    happyday: z.string().min(5, "Digite sua data corretamente"),
 });
 
 type LoginFormInputs = z.infer<typeof loginSchema>;
@@ -32,15 +32,20 @@ export default function Login() {
 
     const onSubmit = async (data: LoginFormInputs) => {
         try {
-            const response = await loginRequest(data.username, data.password);
-            if (response) {
+            const response = await loginRequest(data.cpf, data.happyday);
+            if (response && response.access_token) {
+                localStorage.setItem('access_token', response.access_token);
+                // console.log("Token obtido após login:", response.access_token);
                 login();
                 navigate('/');
+            } else {
+                console.error("Token não encontrado na resposta.");
             }
         } catch (error) {
-            console.log(error);
+            console.error("Erro no processo de login:", error);
         }
     };
+
 
     return (
         <Container>
@@ -53,13 +58,13 @@ export default function Login() {
                     <Body>
                         <label>
                             <h3 style={{ color: "white" }}>Usuário</h3>
-                            <InputLogin type="text" register={register("username")} />
-                            {errors.username && <p style={{ color: "red" }}>{errors.username.message}</p>}
+                            <InputLogin type="text" register={register("cpf")} />
+                            {errors.cpf && <p style={{ color: "red" }}>{errors.cpf.message}</p>}
                         </label>
                         <label>
                             <h3 style={{ color: "white" }}>Senha</h3>
-                            <InputLogin type="date" register={register("password")} />
-                            {errors.password && <p style={{ color: "red" }}>{errors.password.message}</p>}
+                            <InputLogin type="date" register={register("happyday")} />
+                            {errors.happyday && <p style={{ color: "red" }}>{errors.happyday.message}</p>}
                         </label>
                     </Body>
                     <Footer>
