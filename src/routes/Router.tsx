@@ -5,6 +5,7 @@ import Login from '../pages/Login';
 import Home from '../pages/Home';
 import Register from '../pages/Register';
 import Employees from '../pages/Employees';
+import StartScreen from '../pages/StartScreen';
 // import Client from '../pages/Client';
 // import Stock from '../pages/Stock';
 // import Rent from '../pages/Rent';
@@ -23,6 +24,9 @@ const PrivateRoute: React.FC<{ element: JSX.Element }> = ({ element }) => {
 const Router: React.FC = () => {
     return (
         <Routes>
+            {/* Rota da tela de inicio */}
+            <Route path="/Start" element={<StartScreen />} />
+
             {/* Rota de login */}
             <Route path="/login" element={<Login />} />
 
