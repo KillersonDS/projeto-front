@@ -5,7 +5,7 @@ import Login from '../pages/Login';
 import Home from '../pages/Home';
 import Register from '../pages/Register';
 import Employees from '../pages/Employees';
-import StartScreen from '../pages/StartScreen';
+// import StartScreen from '../pages/StartScreen';
 import Client from '../pages/Client';
 import Stock from '../pages/Stock';
 import Rent from '../pages/Rent';
@@ -28,7 +28,7 @@ const Router: React.FC = () => {
 
             <Route element={<LayoutApp />}>
                 <Route path="/funcionarios" element={<PrivateRoute element={<Employees />} />} />
-                <Route path="/comeco" element={<PrivateRoute element={<StartScreen />} />} />
+                {/* <Route path="/comeco" element={<PrivateRoute element={<StartScreen />} />} /> */}
                 <Route path="/cliente" element={<PrivateRoute element={<Client />} />} />
                 <Route path="/estoque" element={<PrivateRoute element={<Stock />} />} />
                 <Route path="/aluguel" element={<PrivateRoute element={<Rent />} />} />
