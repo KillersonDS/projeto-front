@@ -9,7 +9,7 @@ import Stock from "../../assets/icons/stock.svg";
 import profileImageUrl from "../../assets/icons/client.svg";
 
 export default function StartScreen() {
-  const userName = "Jefferson";
+  // const userName = "Jefferson";
 
   const navigate = useNavigate()
 
@@ -17,22 +17,22 @@ export default function StartScreen() {
     <PageContainer> s
       <ProfileContainer>
         <ProfileImage src={profileImageUrl} alt="Perfil" />
-        {userName}
+        {/* {userName} */}
       </ProfileContainer>
       <ButtonContainer>
         <Button onClick={() => navigate('/estoque')}>
           <img src={Stock} alt="" width="40" height="40" />
           <span>Estoque</span>
         </Button>
-        <Button onClick={() => console.log('Ir para Tela 1')}>
+        <Button >
           <img src={Money} alt="" width="40" height="40" />
           <span>Aluguel</span>
         </Button>
-        <Button onClick={() => console.log('Ir para Tela 1')}>
+        <Button >
           <img src={Client} alt="" width="40" height="40" />
           <span>Clientes</span>
         </Button>
-        <Button onClick={() => console.log('Ir para Tela 1')}>
+        <Button >
           <img src={Employess} alt="" width="40" height="40" />
           <span>Funcionarios</span>
         </Button>

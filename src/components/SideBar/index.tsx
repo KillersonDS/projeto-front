@@ -25,7 +25,7 @@ export default function Sidebar() {
                 </button>
             </Header>
             <Pages>
-                <Button onClick={() => navigate('/employees')} >
+                <Button onClick={() => navigate('/funcionarios')} >
                     <img src={Employess} alt=" " height="25px" />
                     <span>Fúncionários</span>
                 </Button>
