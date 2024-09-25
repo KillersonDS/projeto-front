@@ -35,7 +35,6 @@ export default function Login() {
             const response = await loginRequest(data.cpf, data.happyday);
             if (response && response.access_token) {
                 localStorage.setItem('access_token', response.access_token);
-                // console.log("Token obtido após login:", response.access_token);
                 login();
                 navigate('/');
             } else {

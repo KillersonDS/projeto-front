@@ -3,10 +3,10 @@ import { Container, Pages, Header, Button } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { useSidebar } from "../../context/hooks/useSidebar";
 import close from "../../assets/icons/close.svg"
-// import Money from "../../assets/icons/money.svg"
+import Money from "../../assets/icons/money.svg"
 import Employess from "../../assets/icons/employees.svg"
-// import Stock from "../../assets/icons/stock.svg"
-// import Client from "../../assets/icons/client.svg"
+import Stock from "../../assets/icons/stock.svg"
+import Client from "../../assets/icons/client.svg"
 
 export default function Sidebar() {
     const { toggleSidebar, isCollapsed } = useSidebar();
@@ -29,18 +29,18 @@ export default function Sidebar() {
                     <img src={Employess} alt=" " height="25px" />
                     <span>Fúncionários</span>
                 </Button>
-                {/* <Button onClick={() => navigate('/stock')}>
+                <Button onClick={() => navigate('/estoque')}>
                     <img src={Stock} alt="" height="25px" />
                     <span>Estoque</span>
                 </Button>
-                <Button onClick={() => navigate('/rent')} >
+                <Button onClick={() => navigate('/aluguel')} >
                     <img src={Money} alt="" height="25px" style={{ marginRight: "0px" }} />
                     <span>Aluguel</span>
                 </Button>
-                <Button onClick={() => navigate('/client')} >
+                <Button onClick={() => navigate('/cliente')} >
                     <img src={Client} alt=" " height="25px" />
                     <span>Cliente</span>
-                </Button> */}
+                </Button>
             </Pages>
         </Container >
     );
