@@ -1,16 +1,16 @@
 // src/index.tsx
 import React from 'react';
-import { PageContainer, ButtonContainer, Button, ProfileContainer, ProfileImage } from './styles'; // Importa os estilos
+import { Button, ButtonContainer, PageContainer, ProfileContainer, ProfileImage } from './styles'; // Importa os estilos
 
 // Importar os ícones
-import Employess from "../../assets/icons/employees.svg"
-import Client from "../../assets/icons/client.svg"
-import Money from "../../assets/icons/money.svg"
-import Stock from "../../assets/icons/stock.svg"
+import Client from "../../assets/icons/client.svg";
+import Employess from "../../assets/icons/employees.svg";
+import Money from "../../assets/icons/money.svg";
+import Stock from "../../assets/icons/stock.svg";
+import profileImageUrl from "../../assets/icons/client.svg";
 
 const StartScreen: React.FC = () => {
   const userName = "Jefferson";
-  const profileImageUrl = "../../assets/icons/client.svg";
 
   return (
     <PageContainer> {/* Usar o contêiner da página */}
