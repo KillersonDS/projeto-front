@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Container, ContainerContent, Header, Body, Footer, ContainerForm } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -9,10 +10,11 @@ import ButtonDown from "../../components/ButtonDownLogin";
 import InputLogin from "../../components/Input/InputLogin";
 import LogoLogin from "../../assets/img/Logo.svg";
 import { useAuth } from '../../context/AuthContext';
+import { toast } from 'react-toastify';
 import { loginRequest } from '../../service/LoginService';
 
 const loginSchema = z.object({
-    cpf: z.string().min(5, "Digite seu cpf corretamente"),
+    cpf: z.string().min(5, "Digite seu CPF corretamente"),
     happyday: z.string().min(5, "Digite sua data corretamente"),
 });
 
@@ -21,6 +23,7 @@ type LoginFormInputs = z.infer<typeof loginSchema>;
 export default function Login() {
     const navigate = useNavigate();
     const { login } = useAuth();
+    const [loading, setLoading] = useState(false);
 
     const {
         register,
@@ -31,17 +34,49 @@ export default function Login() {
     });
 
     const onSubmit = async (data: LoginFormInputs) => {
+        let toastId: string | number | undefined;
+
         try {
+            setLoading(true);
+            toastId = toast.loading("Processando login...");
+
             const response = await loginRequest(data.cpf, data.happyday);
             if (response && response.access_token) {
                 localStorage.setItem('access_token', response.access_token);
+
+                toast.update(toastId, {
+                    render: "Login bem-sucedido!",
+                    type: "success",
+                    isLoading: false,
+                    autoClose: 2000,
+                    hideProgressBar: false,
+                    theme: "colored",
+                    style: { backgroundColor: '#faca39' },
+                });
+
                 login();
                 navigate('/');
             } else {
+                toast.update(toastId, {
+                    render: "Erro no login. Tente novamente.",
+                    type: "error",
+                    isLoading: false,
+                    autoClose: 2000,
+                });
                 console.error("Token não encontrado na resposta.");
             }
         } catch (error) {
+            if (toastId) {
+                toast.update(toastId, {
+                    render: "Erro no processo de login.",
+                    type: "error",
+                    isLoading: false,
+                    autoClose: 2000,
+                });
+            }
             console.error("Erro no processo de login:", error);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -67,7 +102,9 @@ export default function Login() {
                         </label>
                     </Body>
                     <Footer>
-                        <ButtonDown type="submit">Entrar</ButtonDown>
+                        <ButtonDown type="submit" disabled={loading}>
+                            {loading ? "Entrando..." : "Entrar"}
+                        </ButtonDown>
                         <ButtonDown type="button" onClick={() => navigate("/register")}>
                             Cadastrar-se
                         </ButtonDown>

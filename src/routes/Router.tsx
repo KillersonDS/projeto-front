@@ -1,24 +1,17 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
 import Login from '../pages/Login';
 import Home from '../pages/Home';
 import Register from '../pages/Register';
 import Employees from '../pages/Employees';
-// import StartScreen from '../pages/StartScreen';
 import Client from '../pages/Client';
 import Stock from '../pages/Stock';
 import Rent from '../pages/Rent';
+// import StartScreen from '../pages/StartScreen';
 
 import LayoutApp from '../layout/LayoutHome';
-import { useAuth } from '../context/AuthContext';
+import PrivateRoute from './privateRoute';
 
-const PrivateRoute: React.FC<{ element: JSX.Element }> = ({ element }) => {
-    const { isAuthenticated } = useAuth();
-    const token = localStorage.getItem('access_token');
-
-    return isAuthenticated && token ? element : <Navigate to="/login" />;
-};
 
 const Router: React.FC = () => {
     return (
