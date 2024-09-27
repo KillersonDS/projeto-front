@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
 import { DressContainer, DressImage, DressDetails, DetailsItem, SearchContainer, SearchInput, AddButton } from './styles';
 
+import { useState } from 'react';
+// import { useNavigate } from "react-router-dom";
 interface DressProps {
     imageUrl: string;
     name: string;
@@ -14,7 +15,10 @@ const handleAddDress = () => {
     console.log("Adicionar novo vestido");
 };
 
-const DressPage: React.FC = () => {
+export default function DressPage() {
+
+    // const navigate = useNavigate()
+
     const [dress, setDress] = useState<DressProps>({
         imageUrl: 'https://via.placeholder.com/200',
         name: 'Vestido Floral',
@@ -27,30 +31,23 @@ const DressPage: React.FC = () => {
     console.log(setDress)
 
     return (
-
-        <div>
+        <DressContainer>
             <SearchContainer>
                 <SearchInput
                     type="text"
                     placeholder="Pesquisar vestido..."
-                    // value={searchTerm}
-                    // onChange={handleSearchChange}
                 />
-                <AddButton onClick={handleAddDress}>Adicionar Vestido</AddButton>
+                <AddButton onClick={handleAddDress}  >Adicionar Vestido</AddButton>
+                {/* onClick={() => ("/popUp")} */}
             </SearchContainer>
-
-            <DressContainer>
-                <DressImage src={dress.imageUrl} alt={dress.name} />
-                <DressDetails>
-                    <DetailsItem><strong>Nome:</strong> {dress.name}</DetailsItem>
-                    <DetailsItem><strong>Cor:</strong> {dress.color}</DetailsItem>
-                    <DetailsItem><strong>Tamanho:</strong> {dress.size}</DetailsItem>
-                    <DetailsItem><strong>Código:</strong> {dress.code}</DetailsItem>
-                    <DetailsItem><strong>Status:</strong> {dress.status}</DetailsItem>
-                </DressDetails>
-            </DressContainer>
-        </div>
+            <DressImage src={dress.imageUrl} alt={dress.name} />
+            <DressDetails>
+                <DetailsItem><strong>Nome:</strong> {dress.name}</DetailsItem>
+                <DetailsItem><strong>Cor:</strong> {dress.color}</DetailsItem>
+                <DetailsItem><strong>Tamanho:</strong> {dress.size}</DetailsItem>
+                <DetailsItem><strong>Código:</strong> {dress.code}</DetailsItem>
+                <DetailsItem><strong>Status:</strong> {dress.status}</DetailsItem>
+            </DressDetails>
+        </DressContainer>
     );
 };
-
-export default DressPage;

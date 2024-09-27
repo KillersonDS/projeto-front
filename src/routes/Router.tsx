@@ -1,4 +1,3 @@
-import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Login from '../pages/Login';
 import Home from '../pages/Home';
@@ -17,15 +16,15 @@ const Router: React.FC = () => {
     return (
         <Routes>
             <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/cadastro" element={<Register />} />
 
+            {/* <Route path="/" element={<PrivateRoute element={<StartScreen />} />} /> */}
             <Route element={<LayoutApp />}>
                 <Route path="/funcionarios" element={<PrivateRoute element={<Employees />} />} />
-                {/* <Route path="/comeco" element={<PrivateRoute element={<StartScreen />} />} /> */}
                 <Route path="/cliente" element={<PrivateRoute element={<Client />} />} />
                 <Route path="/estoque" element={<Stock />} />
                 <Route path="/aluguel" element={<PrivateRoute element={<Rent />} />} />
-                <Route path="/" element={<PrivateRoute element={<Home />} />} />
+                <Route path="/home" element={<PrivateRoute element={<Home />} />} />
             </Route>
         </Routes>
     );

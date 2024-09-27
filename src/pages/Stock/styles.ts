@@ -1,5 +1,4 @@
-import styled from "styled-components";
-
+import styled from "styled-components"
 
 export const SearchContainer = styled.div`
   display: flex;
@@ -9,8 +8,7 @@ export const SearchContainer = styled.div`
   position: absolute;
   top: 20px;
   right: 20px;
-`;
-
+`
 
 export const SearchInput = styled.input`
   padding: 10px;
@@ -19,8 +17,7 @@ export const SearchInput = styled.input`
   margin-bottom: 10px;
   font-size: 16px;
   width: 250px;
-`;
-
+`
 
 export const AddButton = styled.button`
   padding: 10px 15px;
@@ -34,8 +31,7 @@ export const AddButton = styled.button`
   &:hover {
     background-color: #45a049;
   }
-`;
-
+`
 
 export const DressContainer = styled.div`
   display: flex;
@@ -44,11 +40,10 @@ export const DressContainer = styled.div`
   padding: 20px;
   background-color: #4f4f4f;
   height: 100vh;
-  width: 100vw;
+  width: 100%;
   gap: 0px;
   position: relative;
-`;
-
+`
 
 export const DressImage = styled.img`
   width: 250px;
@@ -56,8 +51,7 @@ export const DressImage = styled.img`
   border-radius: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-right: 200px;
-`;
-
+`
 
 export const DressDetails = styled.div`
   display: flex;
@@ -72,8 +66,7 @@ export const DressDetails = styled.div`
   margin-right: 100px;
   padding: 10;
   transform: translateX(-130px);
-`;
-
+`
 
 export const DetailsItem = styled.p`
   margin: 10px 0;
@@ -83,4 +76,4 @@ export const DetailsItem = styled.p`
   strong {
     color: #000;
   }
-`;
+`
