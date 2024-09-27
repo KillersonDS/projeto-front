@@ -30,7 +30,7 @@ const Router: React.FC = () => {
                 <Route path="/funcionarios" element={<PrivateRoute element={<Employees />} />} />
                 {/* <Route path="/comeco" element={<PrivateRoute element={<StartScreen />} />} /> */}
                 <Route path="/cliente" element={<PrivateRoute element={<Client />} />} />
-                <Route path="/estoque" element={<PrivateRoute element={<Stock />} />} />
+                <Route path="/estoque" element={<Stock />} />
                 <Route path="/aluguel" element={<PrivateRoute element={<Rent />} />} />
                 <Route path="/" element={<PrivateRoute element={<Home />} />} />
             </Route>
