@@ -1,14 +1,17 @@
+import { Container, ContainerContent, Header, Body, Footer, ContainerForm, FooterControler } from "./styles";
+
 import { useState } from "react";
-import { Container, ContainerContent, Header, Body, Footer, ContainerForm } from "./styles";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import BackGroundLogin from "../../assets/img/background.svg";
+import LogoLogin from "../../assets/img/Logo.svg";
+
 import ButtonDown from "../../components/ButtonDownLogin";
 import InputLogin from "../../components/Input/InputLogin";
-import LogoLogin from "../../assets/img/Logo.svg";
+
 import { useAuth } from '../../context/AuthContext';
 import { toast } from 'react-toastify';
 import { loginRequest } from '../../service/LoginService';
@@ -92,22 +95,25 @@ export default function Login() {
                     <Body>
                         <label>
                             <h3 style={{ color: "white" }}>Usuário</h3>
-                            <InputLogin type="text" register={register("cpf")} />
+                            <InputLogin type="text" register={register("cpf")} id="input" />
                             {errors.cpf && <p style={{ color: "red" }}>{errors.cpf.message}</p>}
                         </label>
                         <label>
                             <h3 style={{ color: "white" }}>Senha</h3>
-                            <InputLogin type="date" register={register("happyday")} />
+                            <InputLogin type="date" register={register("happyday")} id="input" />
                             {errors.happyday && <p style={{ color: "red" }}>{errors.happyday.message}</p>}
                         </label>
                     </Body>
                     <Footer>
-                        <ButtonDown type="submit" disabled={loading}>
-                            {loading ? "Entrando..." : "Entrar"}
-                        </ButtonDown>
-                        <ButtonDown type="button" onClick={() => navigate("/register")}>
-                            Cadastrar-se
-                        </ButtonDown>
+                        <FooterControler>
+                            <ButtonDown type="submit" disabled={loading} id="button">
+                                {/* {loading ? "Entrando..." : "Entrar"} */}
+                                Entrar
+                            </ButtonDown>
+                            <ButtonDown type="button" onClick={() => navigate("/cadastro")} id="button">
+                                Cadastrar-se
+                            </ButtonDown>
+                        </FooterControler>
                     </Footer>
                 </ContainerContent>
             </ContainerForm>
