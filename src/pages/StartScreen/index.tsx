@@ -1,12 +1,12 @@
 import { Button, ButtonContainer, PageContainer, ProfileContainer, ProfileImage } from './styles';
 
-import { useNavigate } from "react-router-dom";
-
 import Client from "../../assets/icons/client.svg";
 import Employess from "../../assets/icons/employees.svg";
 import Money from "../../assets/icons/money.svg";
 import Stock from "../../assets/icons/stock.svg";
 import profileImageUrl from "../../assets/icons/client.svg";
+
+import { useNavigate } from "react-router-dom";
 
 export default function StartScreen() {
     const userName = "Jefferson";
