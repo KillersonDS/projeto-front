@@ -9,14 +9,14 @@ import Stock from "../../assets/icons/stock.svg";
 import profileImageUrl from "../../assets/icons/client.svg";
 
 export default function StartScreen() {
-    const userName = "Jefferson";
+    // const userName = "Jefferson";
 
     const navigate = useNavigate()
     return (
         <PageContainer>
             <ProfileContainer>
                 <ProfileImage src={profileImageUrl} alt="Perfil" />
-                {userName}
+                {/* {userName} */}
             </ProfileContainer>
             <ButtonContainer>
                 <Button onClick={() => navigate('/estoque')}>
