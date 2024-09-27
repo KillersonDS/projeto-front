@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Login from '../pages/Login';
 import Home from '../pages/Home';
-// import Register from '../pages/Register';
+import Register from '../pages/Register';
 import Employees from '../pages/Employees';
 import Client from '../pages/Client';
 import Stock from '../pages/Stock';
@@ -16,7 +16,7 @@ const Router: React.FC = () => {
     return (
         <Routes>
             <Route path="/login" element={<Login />} />
-            {/* <Route path="/cadastro" element={<Register />} /> */}
+            <Route path="/cadastro" element={<Register />} />
 
             <Route path="/" element={<PrivateRoute element={<StartScreen />} />} />
             <Route element={<LayoutApp />}>
