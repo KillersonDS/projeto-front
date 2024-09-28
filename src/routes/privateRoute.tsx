@@ -24,7 +24,7 @@ const PrivateRoute: React.FC<{ element: JSX.Element }> = ({ element }) => {
             toast.error("Você não tem acesso a esta página.");
             setHasShownToast(true);
         }
-        return <Navigate to="/login" replace />;
+        return <Navigate to="/" replace />;
     }
 
     return element;

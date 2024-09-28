@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import ButtonDown from "../../components/ButtonDownLogin";
-import InputLogin from "../../components/Input/InputLogin";
+import InputLogin from "../../components/InputLogin";
 import BackGroundLogin from "../../assets/img/background.svg";
 import LogoLogin from "../../assets/img/Logo.svg";
 import { toast } from 'react-toastify';

@@ -1,36 +1,39 @@
-import { FormWrapper, InputWrapper, Label, Input, Button } from "./styles"
+import { PopupContainer, PopupContent, Input, Label, Button } from './styles';
 
-import { useForm } from 'react-hook-form';
+import { usePopup } from "../../context/PopUpContext"
 
-interface Field {
-    name: string;
-    label: string;
-    type: string;
-}
+export default function DressPopup() {
 
-interface DynamicFormProps {
-    fields: Field[];
-    onSubmit: () => void;
-}
-
-
-export default function DynamicForm({ fields, onSubmit }: DynamicFormProps) {
-    const { register, handleSubmit } = useForm();
+    const { togglePopup, isPopupOpen } = usePopup()
 
     return (
-        <FormWrapper onSubmit={handleSubmit(onSubmit)}>
-            {fields.map((field) => (
-                <InputWrapper key={field.name}>
-                    <Label htmlFor={field.name}>{field.label}:</Label>
-                    <Input
-                        id={field.name}
-                        {...register(field.name)}
-                        type={field.type}
-                    />
-                </InputWrapper>
-            ))}
-            <Button type="submit">Salvar</Button>
-        </FormWrapper>
-    );
-};
+        <>
+            <button onClick={togglePopup}>Abrir Pop-up</button>
 
+            {isPopupOpen && (
+                <PopupContainer>
+                    <PopupContent>
+                        <h2>Pop-Up Edição Vestido</h2>
+
+                        <Label>Nome:</Label>
+                        <Input type="text" placeholder="Nome" />
+
+                        <Label>Cor:</Label>
+                        <Input type="text" placeholder="Cor" />
+
+                        <Label>Tamanho:</Label>
+                        <Input type="text" placeholder="Tamanho" />
+
+                        <Label>Código:</Label>
+                        <Input type="text" placeholder="Código" />
+
+                        <Label>Status:</Label>
+                        <Input type="text" placeholder="Status" />
+
+                        <Button onClick={togglePopup}>Salvar</Button>
+                    </PopupContent>
+                </PopupContainer>
+            )}
+        </>
+    );
+}

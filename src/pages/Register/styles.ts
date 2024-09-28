@@ -53,8 +53,11 @@ export const Body = styled.div`
   gap: 1px;
   width: 100%;
   height: 50%;
-  overflow-y: auto; /* Permite rolagem vertical */
-  padding: 10px; /* Espaçamento interno para não colar os campos nas bordas */
+  overflow-y: auto;
+  padding: 10px;
+
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
 
   label {
     width: 65%;
