@@ -6,7 +6,7 @@ import Employees from '../pages/Employees';
 import Client from '../pages/Client';
 import Stock from '../pages/Stock';
 import Rent from '../pages/Rent';
-import StartScreen from '../pages/StartScreen';
+import Beginning from '../pages/Beginning';
 
 import LayoutApp from '../layout/LayoutHome';
 import PrivateRoute from './privateRoute';
@@ -19,7 +19,7 @@ const Router: React.FC = () => {
         <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/cadastro" element={<Register />} />
-            <Route path="/comeco" element={<PrivateRoute element={<StartScreen />} />} />
+            <Route path="/comeco" element={<PrivateRoute element={<Beginning />} />} />
 
 
             <Route element={<PrivateRoute element={<LayoutApp />} />}>
