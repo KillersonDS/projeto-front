@@ -10,7 +10,7 @@ import BackGroundLogin from "../../assets/img/background.svg";
 import LogoLogin from "../../assets/img/Logo.svg";
 
 import ButtonDown from "../../components/ButtonDownLogin";
-import InputLogin from "../../components/Input/InputLogin";
+import InputLogin from "../../components/InputLogin";
 
 import { useAuth } from '../../context/AuthContext';
 import { toast } from 'react-toastify';
