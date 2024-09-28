@@ -5,6 +5,7 @@ export const PageContainer = styled.div`
   height: 100vh;
   width: 100vw;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `
@@ -13,7 +14,16 @@ export const ButtonContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 100px;
+  flex-wrap: wrap;
+  gap: 50px;
+
+  @media (max-width: 768px) {
+    gap: 30px;
+  }
+
+  @media (max-width: 480px) {
+    gap: 20px;
+  }
 `
 
 export const Button = styled.div`
@@ -24,13 +34,23 @@ export const Button = styled.div`
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 20px;
-  width: 100px;
+  width: 120px;
   cursor: pointer;
   transition: transform 0.2s;
   background-color: #d3d3d3;
 
   &:hover {
     transform: scale(1.05);
+  }
+
+  @media (max-width: 768px) {
+    width: 100px;
+    padding: 15px;
+  }
+
+  @media (max-width: 480px) {
+    width: 100px;
+    padding: 10px;
   }
 `
 
@@ -46,10 +66,25 @@ export const ProfileContainer = styled.div`
   align-items: center;
   gap: 10px;
   font-size: 1.1em;
+
+  @media (max-width: 768px) {
+    padding: 10px 20px;
+    font-size: 1em;
+  }
+
+  @media (max-width: 480px) {
+    padding: 8px 16px;
+    font-size: 0.9em;
+  }
 `
 
 export const ProfileImage = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 50%;
+
+  @media (max-width: 480px) {
+    width: 30px;
+    height: 30px;
+  }
 `

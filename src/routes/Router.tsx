@@ -12,14 +12,17 @@ import LayoutApp from '../layout/LayoutHome';
 import PrivateRoute from './privateRoute';
 
 
+
 const Router: React.FC = () => {
+
     return (
         <Routes>
-            <Route path="/login" element={<Login />} />
+            <Route path="/" element={<Login />} />
             <Route path="/cadastro" element={<Register />} />
+            <Route path="/comeco" element={<PrivateRoute element={<StartScreen />} />} />
 
-            <Route path="/" element={<PrivateRoute element={<StartScreen />} />} />
-            <Route element={<LayoutApp />}>
+
+            <Route element={<PrivateRoute element={<LayoutApp />} />}>
                 <Route path="/funcionarios" element={<PrivateRoute element={<Employees />} />} />
                 <Route path="/cliente" element={<PrivateRoute element={<Client />} />} />
                 <Route path="/estoque" element={<PrivateRoute element={<Stock />} />} />
