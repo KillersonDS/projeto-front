@@ -58,7 +58,7 @@ export default function Login() {
                 });
 
                 login();
-                navigate('/');
+                navigate('/comeco');
             } else {
                 toast.update(toastId, {
                     render: "Erro no login. Tente novamente.",

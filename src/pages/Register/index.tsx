@@ -1,5 +1,4 @@
 import { Container, ContainerContent, Header, Body, Footer, ContainerForm, FooterControler } from "./styles";
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -14,38 +13,43 @@ import axios from 'axios';
 const pageSchema = z.object({
     name: z.string().min(1, "O nome é obrigatório"),
     cpf: z.string().length(11, "O CPF deve ter exatamente 11 dígitos"),
-    happyday: z.string().min(5, "Digite a data de nascimento corretamente"),
-    tell: z.string().min(10, "O telefone deve conter apenas números"),
+    happyday: z.string().refine(
+        (value) => /^\d{4}-\d{2}-\d{2}$/.test(value),
+        "A data de nascimento deve estar no formato YYYY-MM-DD"
+    ),
+    tell: z.number().min(100000000, "O telefone deve conter no mínimo 9 dígitos"),
     role: z.string().min(1, "A permissão do usuário é obrigatória"),
-    num: z.string().min(1, "Número de telefone é obrigatório"),
-    street: z.string().min(1, "Informar a rua é obrigatório"),
-    cep: z.string().regex(/^\d{5}-\d{3}$/, "O CEP deve estar no formato XXXXX-XXX"),
-    complement: z.string().min(1, "Digite um complemento para sua localidade"),
+    address: z.object({
+        num: z
+            .number()
+            .min(1, "Número é obrigatório"),
+        street: z.string().min(1, "Informar a rua é obrigatório"),
+        cep: z.string().regex(/^\d{5}-\d{3}$/, "O CEP deve estar no formato XXXXX-XXX"),
+        complement: z.string().min(1, "Digite um complemento para sua localidade"),
+    })
 });
 
 type RegisterFormInputs = z.infer<typeof pageSchema>;
 
 export default function RegisterForm() {
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm<RegisterFormInputs>({
         resolver: zodResolver(pageSchema),
     });
 
     const onSubmit = async (data: RegisterFormInputs) => {
-        setLoading(true);
         try {
             const payload = {
                 name: data.name,
                 cpf: data.cpf,
                 happyday: data.happyday,
-                tell: data.tell.toString(),
+                tell: data.tell,
                 role: data.role,
                 address: {
-                    num: data.num.toString(),
-                    street: data.street,
-                    cep: data.cep,
-                    complement: data.complement,
+                    num: data.address.num,
+                    street: data.address.street,
+                    cep: data.address.cep,
+                    complement: data.address.complement,
                 },
             };
 
@@ -54,7 +58,7 @@ export default function RegisterForm() {
             await axios.post('https://roseanne-dias-aluguel.onrender.com/register', payload);
 
             toast.success("Cadastro realizado com sucesso!");
-            navigate('/caminho-para-redirecionar');
+            navigate('/');
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.error("Erro de Axios:", error.response?.data);
@@ -63,8 +67,6 @@ export default function RegisterForm() {
                 console.error("Erro inesperado:", error);
                 toast.error("Erro ao cadastrar, tente novamente.");
             }
-        } finally {
-            setLoading(false);
         }
     };
 
@@ -84,7 +86,7 @@ export default function RegisterForm() {
                         </label>
                         <label>
                             <h3 style={{ color: "white" }}>CPF</h3>
-                            <InputLogin type="number" register={register("cpf")} id="input" />
+                            <InputLogin type="text" register={register("cpf")} id="input" />
                             {errors.cpf && <p style={{ color: "red" }}>{errors.cpf.message}</p>}
                         </label>
                         <label>
@@ -94,7 +96,7 @@ export default function RegisterForm() {
                         </label>
                         <label>
                             <h3 style={{ color: "white" }}>Telefone</h3>
-                            <InputLogin type="phone" register={register("tell")} id="input" />
+                            <InputLogin type="number" register={register("tell", { valueAsNumber: true })} id="input" />
                             {errors.tell && <p style={{ color: "red" }}>{errors.tell.message}</p>}
                         </label>
                         <label>
@@ -108,28 +110,28 @@ export default function RegisterForm() {
                         </label>
                         <label>
                             <h3 style={{ color: "white" }}>Número</h3>
-                            <InputLogin register={register("num")} id="input" />
-                            {errors.num && <p style={{ color: "red" }}>{errors.num.message}</p>}
+                            <InputLogin type="number" register={register("address.num", { valueAsNumber: true })} id="input" />
+                            {errors.address?.num && <p style={{ color: "red" }}>{errors.address.num.message}</p>}
                         </label>
                         <label>
                             <h3 style={{ color: "white" }}>Rua</h3>
-                            <InputLogin type="text" register={register("street")} id="input" />
-                            {errors.street && <p style={{ color: "red" }}>{errors.street.message}</p>}
+                            <InputLogin type="text" register={register("address.street")} id="input" />
+                            {errors.address?.street && <p style={{ color: "red" }}>{errors.address.street.message}</p>}
                         </label>
                         <label>
                             <h3 style={{ color: "white" }}>CEP</h3>
-                            <InputLogin register={register("cep")} id="input" />
-                            {errors.cep && <p style={{ color: "red" }}>{errors.cep.message}</p>}
+                            <InputLogin register={register("address.cep")} id="input" />
+                            {errors.address?.cep && <p style={{ color: "red" }}>{errors.address.cep.message}</p>}
                         </label>
                         <label>
                             <h3 style={{ color: "white" }}>Complemento</h3>
-                            <InputLogin type="text" register={register("complement")} id="input" />
-                            {errors.complement && <p style={{ color: "red" }}>{errors.complement.message}</p>}
+                            <InputLogin type="text" register={register("address.complement")} id="input" />
+                            {errors.address?.complement && <p style={{ color: "red" }}>{errors.address.complement.message}</p>}
                         </label>
                     </Body>
                     <Footer>
                         <FooterControler>
-                            <ButtonDown type="submit" disabled={loading} id="button">
+                            <ButtonDown type="submit" id="button">
                                 {/* {loading ? "Processando..." : "Enviar"} */}
                                 Enviar
                             </ButtonDown>

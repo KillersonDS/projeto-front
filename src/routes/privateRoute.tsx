@@ -9,11 +9,10 @@ const PrivateRoute: React.FC<{ element: JSX.Element }> = ({ element }) => {
     const [hasShownToast, setHasShownToast] = useState(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
+        const checkAuth = () => {
             setLoading(false);
-        }, 1000);
-
-        return () => clearTimeout(timer);
+        };
+        checkAuth();
     }, []);
 
     if (loading) {
@@ -22,10 +21,10 @@ const PrivateRoute: React.FC<{ element: JSX.Element }> = ({ element }) => {
 
     if (!isAuthenticated) {
         if (!hasShownToast) {
-            toast.error("Você não tem acesso à página home.");
+            toast.error("Você não tem acesso a esta página.");
             setHasShownToast(true);
         }
-        return <Navigate to="/login" />;
+        return <Navigate to="/login" replace />;
     }
 
     return element;
