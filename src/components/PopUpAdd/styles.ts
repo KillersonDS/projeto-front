@@ -14,6 +14,7 @@ export const PopupContainer = styled.div`
 `
 
 export const PopupContent = styled.div`
+  position: relative;
   background-color: #f7c600;
   padding: 20px;
   border-radius: 15px;
@@ -22,6 +23,17 @@ export const PopupContent = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 15px;
+`
+
+export const CloseButton = styled.button`
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
 `
 
 export const Label = styled.label`
@@ -37,6 +49,7 @@ export const Input = styled.input`
   border: 1px solid #ccc;
   font-size: 16px;
   margin-bottom: 10px;
+  outline: none;
 `
 
 export const Button = styled.button`

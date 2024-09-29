@@ -17,7 +17,7 @@ import { toast } from 'react-toastify';
 import { loginRequest } from '../../service/LoginService';
 
 const loginSchema = z.object({
-    cpf: z.string().min(5, "Digite seu CPF corretamente"),
+    cpf: z.string().length(11, "Digite seu CPF corretamente"),
     happyday: z.string().min(5, "Digite sua data corretamente"),
 });
 

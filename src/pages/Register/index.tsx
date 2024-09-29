@@ -11,13 +11,17 @@ import { toast } from 'react-toastify';
 import axios from 'axios';
 
 const pageSchema = z.object({
-    name: z.string().min(1, "O nome é obrigatório"),
-    cpf: z.string().length(11, "O CPF deve ter exatamente 11 dígitos"),
+    name: z.string().min(1, "O nome é obrigatório").regex(/^[A-Za-zÀ-ÿ\s]+$/, "O nome deve conter apenas letras"),
+    cpf: z.string().length(11, "O CPF deve ter exatamente 11 dígitos").regex(/^\d+$/, "O CPF deve conter apenas números"),
     happyday: z.string().refine(
         (value) => /^\d{4}-\d{2}-\d{2}$/.test(value),
         "A data de nascimento deve estar no formato YYYY-MM-DD"
     ),
-    tell: z.number().min(100000000, "O telefone deve conter no mínimo 9 dígitos"),
+    tell: z
+        .number()
+        .refine((value) => value.toString().length === 9, {
+            message: "O telefone deve conter exatamente 9 dígitos",
+        }),
     role: z.string().min(1, "A permissão do usuário é obrigatória"),
     address: z.object({
         num: z
@@ -61,14 +65,22 @@ export default function RegisterForm() {
             navigate('/');
         } catch (error) {
             if (axios.isAxiosError(error)) {
+                const message = error.response?.data?.message || "Erro sao cadastrar, tente novamente.";
                 console.error("Erro de Axios:", error.response?.data);
-                toast.error("Erro ao cadastrar, tente novamente.");
+
+
+                if (error.response?.data?.statusCode === 409 && error.response?.data?.message.includes("telefone")) {
+                    toast.error("Este número de telefone já está cadastrado.");
+                } else {
+                    toast.error(message);
+                }
             } else {
                 console.error("Erro inesperado:", error);
                 toast.error("Erro ao cadastrar, tente novamente.");
             }
         }
     };
+
 
     return (
         <Container>
@@ -96,7 +108,7 @@ export default function RegisterForm() {
                         </label>
                         <label>
                             <h3 style={{ color: "white" }}>Telefone</h3>
-                            <InputLogin type="number" register={register("tell", { valueAsNumber: true })} id="input" />
+                            <InputLogin type="phone" register={register("tell", { valueAsNumber: true })} id="input" />
                             {errors.tell && <p style={{ color: "red" }}>{errors.tell.message}</p>}
                         </label>
                         <label>

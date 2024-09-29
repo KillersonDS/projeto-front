@@ -15,35 +15,25 @@ export const ContainerContent = styled.div`
 
   display: flex;
   flex-direction: row;
-`
 
-export const InformationData = styled.div`
-  width: 100%;
-  height: 300px;
-
-  display: flex;
-  flex-direction: row;
-`
-export const Information = styled.div`
-  width: 60%;
-  height: 100%;
-
-  background: #faca39;
-  padding: 15px;
-  border-radius: 30px;
-`
-export const InformationImage = styled.div`
-  width: 40%;
-  height: 100%;
-  background-color: white;
-  border-radius: 20px;
-  padding: 15px;
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column-reverse;
+  }
 `
 
 export const ContainerLeft = styled.div`
   display: flex;
+  flex-direction: column;
+  gap: 15px;
   width: 70vw;
   height: 100%;
+  padding: 20px;
+
+  @media (max-width: 768px) {
+    display: flex;
+    width: 100%;
+  }
 `
 export const ContainerRight = styled.div`
   display: flex;
@@ -55,4 +45,18 @@ export const ContainerRight = styled.div`
 
   width: 30vw;
   height: 100%;
+
+  @media (max-width: 768px) {
+    display: flex;
+    width: 100%;
+    height: 40%;
+  }
+`
+export const Image = styled.div`
+  width: 40%;
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 10px;
 `

@@ -4,7 +4,7 @@ export const Container = styled.div<{ isCollapsed: boolean }>`
   display: flex;
   flex-direction: column;
   background: #3e3e3e;
-  width: ${(props) => (props.isCollapsed ? "25%" : "60px")};
+  width: ${(props) => (props.isCollapsed ? "26%" : "60px")};
   transform: ${(props) => (props.isCollapsed ? "true" : "scaleX(-1)")};
   transition: width 0.9s ease;
   height: 100vh;
@@ -17,6 +17,12 @@ export const Header = styled.header`
   display: flex;
   justify-content: flex-end;
   padding: 20px;
+
+  @media (max-width: 768px) {
+    img {
+      display: none !important;
+    }
+  }
 `
 export const Pages = styled.div`
   display: flex;
@@ -40,6 +46,12 @@ export const Button = styled.button`
   span {
     margin-right: 5px;
     flex-grow: 1;
+  }
+
+  @media (max-width: 768px) {
+    span {
+      display: none !important;
+    }
   }
 `
 export const Footer = styled.footer`

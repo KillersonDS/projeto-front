@@ -1,19 +1,16 @@
-import { PopupContainer, PopupContent, Input, Label, Button } from './styles';
+import { PopupContainer, PopupContent, Input, Label, Button, CloseButton } from './styles';
+import { usePopup } from "../../context/PopUpContext";
 
-import { usePopup } from "../../context/PopUpContext"
-
-export default function DressPopup() {
-
-    const { togglePopup, isPopupOpen } = usePopup()
+export default function DressPopupAdd() {
+    const { togglePopup, popupType } = usePopup();
 
     return (
         <>
-            <button onClick={togglePopup}>Abrir Pop-up</button>
-
-            {isPopupOpen && (
+            {popupType === 'add' && (
                 <PopupContainer>
                     <PopupContent>
-                        <h2>Pop-Up Edição Vestido</h2>
+                        <CloseButton onClick={() => togglePopup()}>X</CloseButton>
+                        <h2>Adicionar Vestido</h2>
 
                         <Label>Nome:</Label>
                         <Input type="text" placeholder="Nome" />
@@ -30,7 +27,7 @@ export default function DressPopup() {
                         <Label>Status:</Label>
                         <Input type="text" placeholder="Status" />
 
-                        <Button onClick={togglePopup}>Salvar</Button>
+                        <Button onClick={() => togglePopup()}>Salvar</Button>
                     </PopupContent>
                 </PopupContainer>
             )}

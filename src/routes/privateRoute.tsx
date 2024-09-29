@@ -9,21 +9,23 @@ const PrivateRoute: React.FC<{ element: JSX.Element }> = ({ element }) => {
     const [hasShownToast, setHasShownToast] = useState(false);
 
     useEffect(() => {
+
         const checkAuth = () => {
             setLoading(false);
+            if (!isAuthenticated && !hasShownToast) {
+                toast.error("Você não tem acesso a esta página.");
+                setHasShownToast(true);
+            }
         };
+
         checkAuth();
-    }, []);
+    }, [isAuthenticated, hasShownToast]);
 
     if (loading) {
         return null;
     }
 
     if (!isAuthenticated) {
-        if (!hasShownToast) {
-            toast.error("Você não tem acesso a esta página.");
-            setHasShownToast(true);
-        }
         return <Navigate to="/" replace />;
     }
 

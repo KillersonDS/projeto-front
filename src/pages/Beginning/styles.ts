@@ -16,14 +16,6 @@ export const ButtonContainer = styled.div`
   align-items: center;
   flex-wrap: wrap;
   gap: 50px;
-
-  @media (max-width: 768px) {
-    gap: 30px;
-  }
-
-  @media (max-width: 480px) {
-    gap: 20px;
-  }
 `
 
 export const Button = styled.div`

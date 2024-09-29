@@ -26,4 +26,8 @@ export const Icon = styled.img`
   width: 20px;
   height: 20px;
   pointer-events: none;
+
+  @media (max-width: 768px) {
+    width: 12px;
+  }
 `
