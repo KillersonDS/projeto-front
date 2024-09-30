@@ -57,8 +57,6 @@ export default function RegisterForm() {
                 },
             };
 
-            console.log("Payload enviado:", payload);
-
             await axios.post('https://roseanne-dias-aluguel.onrender.com/register', payload);
 
             toast.success("Cadastro realizado com sucesso!");

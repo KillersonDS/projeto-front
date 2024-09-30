@@ -17,4 +17,8 @@ export const Button = styled.button`
     width: 120px;
     font-size: 12px;
   }
+
+  @media (min-width: 769px) and (max-width: 1000px) {
+    width: 80% !important;
+  }
 `
