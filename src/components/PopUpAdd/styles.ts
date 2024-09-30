@@ -23,6 +23,10 @@ export const PopupContent = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 15px;
+
+  @media (max-width: 768px) {
+    gap: 0px;
+  }
 `
 
 export const CloseButton = styled.button`
