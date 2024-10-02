@@ -1,48 +1,38 @@
 import { InformationDataContainer, InformationImage, Information, Image } from './styles'; // Importe seus estilos
-
-import Trash from "../../assets/icons/trash.svg"
-import Pencil from "../../assets/icons/pencil.svg"
-
-interface Dress {
-    id: number;
-    nome: string;
-    cor: string;
-    tamanho: string;
-    codigo: string;
-    status: string;
-}
-
-type PopupType = 'edit' | 'add';
+import Trash from "../../assets/icons/trash.svg";
+// import Pencil from "../../assets/icons/pencil.svg";
+import { Dress } from '../../pages/Stock/dressType';
 
 interface InformationDataProps {
-    vestidos: Dress[];
-    togglePopup: (action: PopupType) => void;
+    vestido: Dress;
+    togglePopup: (action: 'edit') => void;
+    onDelete: (id: number) => void;
+    // onEdit: (vestido: Dress) => void;
 }
 
-const InformationData: React.FC<InformationDataProps> = ({ vestidos, togglePopup }) => {
+const InformationData: React.FC<InformationDataProps> = ({ vestido, onDelete }) => {
+    // onEdit,
     return (
         <InformationDataContainer>
             <InformationImage>
                 {/* <img src="" alt="" /> */}
             </InformationImage>
             <Information>
-                {vestidos.map((vestido) => (
-                    <div key={vestido.id}>
-                        <h3>Nome: {vestido.nome}</h3>
-                        <br />
-                        <h3>Cor: {vestido.cor}</h3>
-                        <br />
-                        <h3>Tamanho: {vestido.tamanho}</h3>
-                        <br />
-                        <h3>Código: {vestido.codigo}</h3>
-                        <br />
-                        <h3>Status: {vestido.status}</h3>
-                    </div>
-                ))}
-                <Image>
-                    <img src={Trash} width={20} alt="Delete" />
-                    <img src={Pencil} width={20} alt="Edit" onClick={() => togglePopup('edit')} />
-                </Image>
+                <div key={vestido.id}>
+                    <h3>Nome: {vestido.title}</h3>
+                    <br />
+                    <h3>Cor: {vestido.description}</h3>
+                    <br />
+                    <h3>Tamanho: {vestido.size}</h3>
+                    <br />
+                    <h3>Código: {vestido.code}</h3>
+                    <br />
+                    <h3>Status: {vestido.status}</h3>
+                    <Image>
+                        <img src={Trash} width={20} alt="Delete" onClick={() => onDelete(vestido.id)} />
+                        {/* <img src={Pencil} width={20} alt="Edit" onClick={() => onEdit(vestido)} /> */}
+                    </Image>
+                </div>
             </Information>
         </InformationDataContainer>
     );
