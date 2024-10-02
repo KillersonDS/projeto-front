@@ -1,27 +1,30 @@
-// import axios from "axios"
+import axios from "axios";
+import { toast } from "react-toastify";
 
-// const API_URL = "https://roseanne-dias-aluguel.onrender.com"
+const API_URL = "https://roseanne-dias-aluguel.onrender.com/stock";
 
-// export const CreatePopUp = async (
-//     title: string,
-//     description: string,
-//     size: string,
-//     code: string,
-//     status: string,
+export const deleteVestido = async (id: number) => {
+    const token = localStorage.getItem('access_token');
 
-// ) => {
-//     try {
-//         const response = await axios.post(API_URL, {
-//             title,
-//             description,
-//             size,
-//             code,
-//             status,
-//         })
+    if (!token) {
+        throw new Error("Token não encontrado. O usuário não está autenticado.");
+    }
 
-//         return response.data
-//         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-//     } catch (error) {
-//         throw new Error("Erro ao retornar os dados em questão")
-//     }
-// }
+    try {
+        const response = await axios.delete(`${API_URL}/${id}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        console.log('Resposta da deleção:', response.data);
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            toast.error("Erro ao deletar o vestido:", error.response?.data || error.message);
+        } else {
+            console.error("Erro desconhecido:", error);
+        }
+        throw new Error("Erro ao deletar o vestido");
+    }
+};
+

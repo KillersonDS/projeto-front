@@ -1,94 +1,105 @@
-// import { PopupContainer, PopupContent, Input, Label, Button, CloseButton } from './styles';
-// import { usePopup } from "../../context/PopUpContext";
-// import { useForm } from "react-hook-form";
-// import { z } from "zod";
-// import { zodResolver } from "@hookform/resolvers/zod";
-// import { CreatePopUp } from '../../service/CreatePopUpService';
+import { PopupContainer, PopupContent, Input, Label, Button, CloseButton } from './styles';
+import { usePopup } from "../../context/PopUpContext";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { CreatePopUp } from '../../service/CreatePopUpService';
+import { toast } from 'react-toastify';
 
-// const productSchema = z.object({
-//     title: z.string().min(1, "Nome é obrigatório"),
-//     description: z.string().min(1, "Cor é obrigatória"),
-//     size: z.string().min(1, "Tamanho é obrigatório"),
-//     code: z.string().min(1, "Código é obrigatório"),
-//     status: z.string().min(1, "Status é obrigatório"),
-// });
+const productSchema = z.object({
+    title: z.string().min(1, "Nome é obrigatório"),
+    description: z.string().min(1, "Descrição é obrigatória"),
+    size: z.string().min(1, "Tamanho é obrigatório"),
+    code: z.string().min(1, "Código é obrigatório"),
+    status: z.string().min(1, "Status é obrigatório"),
+});
 
-// type ProductFormData = z.infer<typeof productSchema>;
+interface Vestido {
+    id: number;
+    title: string;
+    description: string;
+    size: string;
+    code: string;
+    status: string;
+}
 
-// export default function DressPopupAdd() {
-//     const { togglePopup, popupType } = usePopup();
-//     const { register, handleSubmit, formState: { errors }, reset } = useForm<ProductFormData>({
-//         resolver: zodResolver(productSchema)
-//     });
+type ProductFormData = z.infer<typeof productSchema>;
 
-//     const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjcGYiOiI2MTkyOTc5MzMyNCIsImlkIjoiYWY5ZGViNDctNjVjOS00OGJjLWIxNTctNmRlMjM3NWY4M2MzIiwiaWF0IjoxNzI3MDY0OTY1LCJleHAiOjE3MjcwNjg1NjV9.8Iep_L9WfUe4r-soL5cstCT2WfRWy4GrgrtYVRH40pY";
+interface DressPopupAddProps {
+    addVestido: (novoVestido: Vestido) => void;
+}
 
-//     const onSubmit = async (data: ProductFormData) => {
-//         try {
-//             const response = await CreatePopUp(data.title, data.description, data.size, data.code, data.status, token);
-//             console.log('Produto criado:', response);
-//             togglePopup();
-//             reset();
-//             // eslint-disable-next-line @typescript-eslint/no-unused-vars
-//         } catch (error) {
-//             console.error('Erro ao criar o produto');
-//         }
-//     };
+export default function DressPopupAdd({ addVestido }: DressPopupAddProps) {
+    const { togglePopup, popupType } = usePopup();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm<ProductFormData>({
+        resolver: zodResolver(productSchema)
+    });
 
-//     return (
-//         <>
-//             {popupType === 'add' && (
-//                 <PopupContainer>
-//                     <PopupContent>
-//                         <CloseButton onClick={() => togglePopup()}>X</CloseButton>
-//                         <h2>Adicionar Vestido</h2>
+    const onSubmit = async (data: ProductFormData) => {
+        const token = localStorage.getItem('access_token');
+        if (!token) {
+            toast.error('Você precisa estar logado para adicionar um produto.');
+            return;
+        }
 
-//                         <form onSubmit={handleSubmit(onSubmit)}>
-//                             <Label>Nome:</Label>
-//                             <Input
-//                                 type="text"
-//                                 placeholder="Nome"
-//                                 {...register("title")}
-//                             />
-//                             {errors.title && <span>{errors.title.message}</span>}
+        try {
+            const response = await CreatePopUp(data.title, data.description, data.size, data.code, data.status, token);
+            const novoVestido: Vestido = {
+                id: response.id,
+                title: data.title,
+                description: data.description,
+                size: data.size,
+                code: data.code,
+                status: data.status,
+            };
+            addVestido(novoVestido);
+            toast.success('Produto criado com sucesso!');
+            togglePopup();
+            reset();
+        } catch (error) {
+            toast.error('Erro ao criar o produto');
+            console.error('Erro ao criar o produto:', error);
+        }
+    };
 
-//                             <Label>Cor:</Label>
-//                             <Input
-//                                 type="text"
-//                                 placeholder="Cor"
-//                                 {...register("description")}
-//                             />
-//                             {errors.description && <span>{errors.description.message}</span>}
+    return (
+        <>
+            {popupType === 'add' && (
+                <PopupContainer>
+                    <PopupContent>
+                        <CloseButton onClick={() => togglePopup()}>X</CloseButton>
+                        <h2>Adicionar Vestido</h2>
 
-//                             <Label>Tamanho:</Label>
-//                             <Input
-//                                 type="text"
-//                                 placeholder="Tamanho"
-//                                 {...register("size")}
-//                             />
-//                             {errors.size && <span>{errors.size.message}</span>}
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <Label>Nome:</Label>
+                            <Input type="text" placeholder="Nome" {...register("title")} />
+                            {errors.title && <span>{errors.title.message}</span>}
 
-//                             <Label>Código:</Label>
-//                             <Input
-//                                 type="text"
-//                                 placeholder="Código"
-//                                 {...register("code")}
-//                             />
-//                             {errors.code && <span>{errors.code.message}</span>}
+                            <Label>Descrição:</Label>
+                            <Input type="text" placeholder="Descrição" {...register("description")} />
+                            {errors.description && <span>{errors.description.message}</span>}
 
-//                             <Label>Status:</Label>
-//                             <Input
-//                                 type="text"
-//                                 placeholder="Status"
-//                                 {...register("status")}
-//                             />
-//                             {errors.status && <span>{errors.status.message}</span>}
+                            <Label>Tamanho:</Label>
+                            <Input type="text" placeholder="Tamanho" {...register("size")} />
+                            {errors.size && <span>{errors.size.message}</span>}
 
-//                             <Button type="submit">Salvar</Button>
-//                         </form>
-//                     </PopupContent>
-//                 </PopupContainer>
-//             )}
-//         </>
-//     );
-// }
+                            <Label>Código:</Label>
+                            <Input type="text" placeholder="Código" {...register("code")} />
+                            {errors.code && <span>{errors.code.message}</span>}
+
+                            <Label>Status:</Label>
+                            <select {...register("status")}>
+                                <option value="">Selecione um status</option>
+                                <option value="disponível">Disponível</option>
+                                <option value="indisponível">Indisponível</option>
+                            </select>
+                            {errors.status && <span>{errors.status.message}</span>}
+
+                            <Button type="submit">Salvar</Button>
+                        </form>
+                    </PopupContent>
+                </PopupContainer>
+            )}
+        </>
+    );
+}
