@@ -13,10 +13,9 @@ import DressPopupEdit from '../../components/PopUpEdit';
 
 export default function Stock() {
     const { togglePopup, isPopupOpen } = usePopup();
-
     const [vestidos, setVestidos] = useState<Dress[]>([]);
+    const [searchTerm, setSearchTerm] = useState<string>(''); // Adicionado para armazenar o termo de busca
     const [selectedVestido, setSelectedVestido] = useState<Dress | null>(null);
-
 
     const loadVestidos = async () => {
         const token = localStorage.getItem('access_token');
@@ -39,7 +38,6 @@ export default function Stock() {
         loadVestidos();
     }, []);
 
-
     const addVestido = (novoVestido: Dress) => {
         setVestidos((prevVestidos) => [...prevVestidos, novoVestido]);
     };
@@ -57,8 +55,6 @@ export default function Stock() {
         togglePopup();
     };
 
-
-
     const removeVestido = async (id: number) => {
         try {
             await deleteVestido(id);
@@ -70,11 +66,20 @@ export default function Stock() {
         }
     };
 
+    // Lógica para filtrar e mover o resultado da busca para o topo
+    const filteredVestidos = vestidos.filter(vestido =>
+        vestido.title.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    const vestidosOrdenados = searchTerm
+        ? [...filteredVestidos, ...vestidos.filter(vestido => !vestido.title.toLowerCase().includes(searchTerm.toLowerCase()))]
+        : vestidos;
+
     return (
         <Container>
             <ContainerContent>
                 <ContainerLeft>
-                    {vestidos.map((vestido) => (
+                    {vestidosOrdenados.map((vestido) => (
                         <InformationData
                             key={vestido.id}
                             vestido={vestido}
@@ -85,7 +90,12 @@ export default function Stock() {
                     ))}
                 </ContainerLeft>
                 <ContainerRight>
-                    <Search placeholder='Procure por vestidos...' />
+                    {/* Adicionando a funcionalidade de busca */}
+                    <Search
+                        placeholder="Procure por vestidos..."
+                        type="text"
+                        onChange={(e) => setSearchTerm(e.target.value)} // Atualiza o termo de busca
+                    />
                     <ButtonSearch onClick={() => togglePopup('add')}>
                         Adicionar Vestido
                     </ButtonSearch>
@@ -108,8 +118,7 @@ export default function Stock() {
                 </>
             )}
 
-
             <ToastContainer />
         </Container>
     );
-};
+}
