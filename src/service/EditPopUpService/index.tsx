@@ -10,13 +10,12 @@ export const UpdatePopUp = async (vestido: Dress, token: string) => {
     }
 
     try {
-        const response = await axios.put(`${API_URL}/${vestido.id}`, vestido, {
+        const response = await axios.patch(`${API_URL}/${vestido.id}`, vestido, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         });
 
-        console.log('Resposta da atualização:', response.data);
         return response.data;
     } catch (error) {
         if (axios.isAxiosError(error)) {

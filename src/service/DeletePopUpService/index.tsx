@@ -17,12 +17,12 @@ export const deleteVestido = async (id: number) => {
             },
         });
 
-        console.log('Resposta da deleção:', response.data);
+        return response
     } catch (error) {
         if (axios.isAxiosError(error)) {
             toast.error("Erro ao deletar o vestido:", error.response?.data || error.message);
         } else {
-            console.error("Erro desconhecido:", error);
+            toast.error("Erro desconhecido");
         }
         throw new Error("Erro ao deletar o vestido");
     }

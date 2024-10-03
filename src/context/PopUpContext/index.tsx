@@ -5,6 +5,7 @@ type PopupType = 'add' | 'edit' | null;
 interface PopupContextType {
     isPopupOpen: boolean;
     popupType: PopupType;
+
     togglePopup: (type?: PopupType) => void;
 }
 

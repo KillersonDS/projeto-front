@@ -52,13 +52,12 @@ export default function DressPopupEdit({ vestido, onClose, onUpdate }: DressPopu
             };
 
             await UpdatePopUp(updatedVestido, token);
-            onUpdate(updatedVestido);
+            onUpdate(updatedVestido); // Atualiza a lista de vestidos no componente pai
             toast.success('Produto editado com sucesso!');
-            onClose();
+            onClose(); // Fecha o pop-up após edição
             reset();
-            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
-            toast.error('Erro ao editar o produto');
+            toast.error('Erro ao editar o produto: ' + (error instanceof Error ? error.message : "Erro desconhecido"));
         }
     };
 

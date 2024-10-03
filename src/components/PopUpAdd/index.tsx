@@ -5,6 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CreatePopUp } from '../../service/CreatePopUpService';
 import { toast } from 'react-toastify';
+import { Dress } from '../../pages/Stock/dressType';
 
 const productSchema = z.object({
     title: z.string().min(1, "Nome é obrigatório"),
@@ -14,19 +15,11 @@ const productSchema = z.object({
     status: z.string().min(1, "Status é obrigatório"),
 });
 
-interface Vestido {
-    id: number;
-    title: string;
-    description: string;
-    size: string;
-    code: string;
-    status: string;
-}
 
 type ProductFormData = z.infer<typeof productSchema>;
 
 interface DressPopupAddProps {
-    addVestido: (novoVestido: Vestido) => void;
+    addVestido: (novoVestido: Dress) => void;
 }
 
 export default function DressPopupAdd({ addVestido }: DressPopupAddProps) {
@@ -44,7 +37,7 @@ export default function DressPopupAdd({ addVestido }: DressPopupAddProps) {
 
         try {
             const response = await CreatePopUp(data.title, data.description, data.size, data.code, data.status, token);
-            const novoVestido: Vestido = {
+            const novoVestido: Dress = {
                 id: response.id,
                 title: data.title,
                 description: data.description,
