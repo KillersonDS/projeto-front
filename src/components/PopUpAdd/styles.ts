@@ -52,12 +52,12 @@ export const Input = styled.input`
   border-radius: 10px;
   border: 1px solid #ccc;
   font-size: 16px;
-  margin-bottom: 10px;
+  margin-bottom: 2px;
   outline: none;
 `
 
 export const Button = styled.button`
-  padding: 10px 20px;
+  padding: 20px 30px;
   background-color: #fff;
   color: #000;
   border: none;
@@ -65,6 +65,8 @@ export const Button = styled.button`
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
+  margin-left: 90px;
+  margin-top: 30px;
 
   &:hover {
     background-color: #ddd;

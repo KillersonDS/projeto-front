@@ -66,19 +66,19 @@ export default function DressPopupAdd({ addVestido }: DressPopupAddProps) {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <Label>Nome:</Label>
                             <Input type="text" placeholder="Nome" {...register("title")} />
-                            {errors.title && <span style={{ color: "red" }}>{errors.title.message}</span>}
+                            {errors.title && <span style={{ color: "red", display: 'flex', flexDirection: "column", paddingBottom: "10px" }}>{errors.title.message}</span>}
 
                             <Label>Descrição:</Label>
                             <Input type="text" placeholder="Descrição" {...register("description")} />
-                            {errors.description && <span style={{ color: "red" }}>{errors.description.message}</span>}
+                            {errors.description && <span style={{ color: "red", display: 'flex', flexDirection: "column", paddingBottom: "10px" }}>{errors.description.message}</span>}
 
                             <Label>Tamanho:</Label>
                             <Input type="text" placeholder="Tamanho" {...register("size")} />
-                            {errors.size && <span style={{ color: "red" }}>{errors.size.message}</span>}
+                            {errors.size && <span style={{ color: "red", display: 'flex', flexDirection: "column", paddingBottom: "10px" }}>{errors.size.message}</span>}
 
                             <Label>Código:</Label>
                             <Input type="text" placeholder="Código" {...register("code")} />
-                            {errors.code && <span style={{ color: "red" }}>{errors.code.message}</span>}
+                            {errors.code && <span style={{ color: "red", display: 'flex', flexDirection: "column", paddingBottom: "10px" }}>{errors.code.message}</span>}
 
                             <Label>Status:</Label>
                             <select {...register("status")}>
@@ -86,7 +86,7 @@ export default function DressPopupAdd({ addVestido }: DressPopupAddProps) {
                                 <option value="disponível">Disponível</option>
                                 <option value="indisponível">Indisponível</option>
                             </select>
-                            {errors.status && <span style={{ color: "red" }}>{errors.status.message}</span>}
+                            {errors.status && <span style={{ color: "red", display: 'flex', flexDirection: "column", paddingBottom: "10px" }}>{errors.status.message}</span>}
 
                             <Button type="submit">Salvar</Button>
                         </form>
