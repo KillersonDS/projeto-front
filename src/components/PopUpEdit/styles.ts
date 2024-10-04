@@ -104,3 +104,23 @@ export const AjustButton = styled.div`
 export const Separator = styled.div`
   padding: 0.3rem;
 `
+export const SelectEdit = styled.select`
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  option {
+    background-color: #fff;
+    color: #333;
+  }
+`;
