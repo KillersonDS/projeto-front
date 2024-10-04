@@ -20,10 +20,10 @@ const Router: React.FC = () => {
             <Route path="/cadastro" element={<Register />} />
             <Route path="/comeco" element={<PrivateRoute element={<Beginning />} />} />
 
-            <Route element={<LayoutApp />} >
+            <Route element={<PrivateRoute element={<LayoutApp />} />} >
                 <Route path="/funcionarios" element={<PrivateRoute element={<Employees />} />} />
                 <Route path="/cliente" element={<PrivateRoute element={<Client />} />} />
-                <Route path="/estoque" element={<Stock />} />
+                <Route path="/estoque" element={<PrivateRoute element={<Stock />} />} />
                 <Route path="/aluguel" element={<PrivateRoute element={<Rent />} />} />
 
             </Route>

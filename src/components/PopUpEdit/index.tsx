@@ -1,4 +1,4 @@
-import { PopupContainer, PopupContent, Input, Label, Button, CloseButton } from './styles';
+import { PopupContainer, PopupContent, Input, Label, ErrorMessage, AjustButton, Separator, Button, CloseButton } from './styles';
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -69,25 +69,37 @@ export default function DressPopupEdit({ vestido, onClose, onUpdate }: DressPopu
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Label>Nome:</Label>
                     <Input type="text" {...register("title")} />
-                    {errors.title && <span style={{ color: "red" }}>{errors.title.message}</span>}
+                    {errors.title && <ErrorMessage style={{ color: "red" }}>{errors.title.message}</ErrorMessage>}
+
+                    <Separator />
 
                     <Label>Descrição:</Label>
                     <Input type="text" {...register("description")} />
-                    {errors.description && <span style={{ color: "red" }}>{errors.description.message}</span>}
+                    {errors.description && <ErrorMessage style={{ color: "red" }}>{errors.description.message}</ErrorMessage>}
+
+                    <Separator />
 
                     <Label>Tamanho:</Label>
                     <Input type="text" {...register("size")} />
-                    {errors.size && <span style={{ color: "red" }}>{errors.size.message}</span>}
+                    {errors.size && <ErrorMessage style={{ color: "red" }}>{errors.size.message}</ErrorMessage>}
+
+                    <Separator />
 
                     <Label>Código:</Label>
                     <Input type="text" {...register("code")} />
-                    {errors.code && <span style={{ color: "red" }}>{errors.code.message}</span>}
+                    {errors.code && <ErrorMessage style={{ color: "red" }}>{errors.code.message}</ErrorMessage>}
+
+                    <Separator />
 
                     <Label>Status:</Label>
                     <Input type="text" {...register("status")} />
-                    {errors.status && <span style={{ color: "red" }}>{errors.status.message}</span>}
+                    {errors.status && <ErrorMessage style={{ color: "red" }}>{errors.status.message}</ErrorMessage>}
 
-                    <Button type="submit">Salvar</Button>
+                    <Separator />
+                    <AjustButton>
+
+                        <Button type="submit">Salvar</Button>
+                    </AjustButton>
                 </form>
             </PopupContent>
         </PopupContainer>

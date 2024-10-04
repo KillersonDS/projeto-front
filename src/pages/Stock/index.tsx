@@ -4,40 +4,39 @@ import Search from '../../components/Search';
 import { usePopup } from "../../context/PopUpContext";
 import DressPopup from '../../components/PopUpAdd';
 import InformationData from "../../components/Dress";
-// import { useEffect} from 'react'; 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Dress } from "./dressType";
 import { toast, ToastContainer } from 'react-toastify';
 import { deleteVestido } from "../../service/DeletePopUpService";
-// import { fetchVestidos } from "../../service/ListPopUpService";
+import { fetchVestidos } from "../../service/ListPopUpService";
 import DressPopupEdit from '../../components/PopUpEdit';
 
 export default function Stock() {
     const { togglePopup, isPopupOpen } = usePopup();
     const [vestidos, setVestidos] = useState<Dress[]>([]);
-    const [searchTerm, setSearchTerm] = useState<string>(''); // Adicionado para armazenar o termo de busca
+    const [searchTerm, setSearchTerm] = useState<string>('');
     const [selectedVestido, setSelectedVestido] = useState<Dress | null>(null);
 
-    // const loadVestidos = async () => {
-    //     const token = localStorage.getItem('access_token');
-    //     if (!token) {
-    //         toast.error('Você precisa estar logado para carregar os vestidos.');
-    //         return;
-    //     }
+    const loadVestidos = async () => {
+        const token = localStorage.getItem('access_token');
+        if (!token) {
+            toast.error('Você precisa estar logado para carregar os vestidos.');
+            return;
+        }
 
-    //     try {
-    //         const vestidosData = await fetchVestidos(token);
-    //         setVestidos(vestidosData);
-    //         // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    //     } catch (error) {
-    //         toast.error('Erro ao carregar vestidos.');
-    //         setVestidos([]);
-    //     }
-    // };
+        try {
+            const vestidosData = await fetchVestidos(token);
+            setVestidos(vestidosData);
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        } catch (error) {
+            toast.error('Erro ao carregar vestidos.');
+            setVestidos([]);
+        }
+    };
 
-    // useEffect(() => {
-    //     loadVestidos();
-    // }, []);
+    useEffect(() => {
+        loadVestidos();
+    }, []);
 
     const addVestido = (novoVestido: Dress) => {
         setVestidos((prevVestidos) => [...prevVestidos, novoVestido]);
