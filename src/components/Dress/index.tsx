@@ -19,7 +19,7 @@ const InformationData: React.FC<InformationDataProps> = ({ vestido, onDelete, on
             <Information>
                 <InformationContent key={vestido.id}>
                     <h3>Titulo: {vestido.title}</h3>
-                    <h3>descrição: {vestido.description}</h3>
+                    <h3>Descrição: {vestido.description}</h3>
                     <h3>Tamanho: {vestido.size}</h3>
                     <h3>Código: {vestido.code}</h3>
                     <h3>Status: {vestido.status}</h3>
