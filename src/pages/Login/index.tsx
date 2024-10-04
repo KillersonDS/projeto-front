@@ -67,8 +67,9 @@ export default function Login() {
                     isLoading: false,
                     autoClose: 2000,
                 });
-                console.error("Token não encontrado na resposta.");
+                toast.error("Token não encontrado na resposta.");
             }
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
             if (toastId) {
                 toast.update(toastId, {
@@ -78,7 +79,7 @@ export default function Login() {
                     autoClose: 2000,
                 });
             }
-            console.error("Erro no processo de login:", error);
+            toast.error("Erro no processo de login");
         } finally {
             setLoading(false);
         }

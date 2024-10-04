@@ -64,7 +64,6 @@ export default function RegisterForm() {
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 const message = error.response?.data?.message || "Erro sao cadastrar, tente novamente.";
-                console.error("Erro de Axios:", error.response?.data);
 
 
                 if (error.response?.data?.statusCode === 409 && error.response?.data?.message.includes("telefone")) {
@@ -73,7 +72,6 @@ export default function RegisterForm() {
                     toast.error(message);
                 }
             } else {
-                console.error("Erro inesperado:", error);
                 toast.error("Erro ao cadastrar, tente novamente.");
             }
         }
