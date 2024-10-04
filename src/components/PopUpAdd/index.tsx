@@ -1,4 +1,4 @@
-import { PopupContainer, PopupContent, Input, Label, Button, CloseButton } from './styles';
+import { PopupContainer, PopupContent, Input, Label, Separator, AjustButton, Button, Select, CloseButton, ErrorMessage } from './styles';
 import { usePopup } from "../../context/PopUpContext";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -66,29 +66,43 @@ export default function DressPopupAdd({ addVestido }: DressPopupAddProps) {
                         <form onSubmit={handleSubmit(onSubmit)}>
                             <Label>Nome:</Label>
                             <Input type="text" placeholder="Nome" {...register("title")} />
-                            {errors.title && <span style={{ color: "red", display: 'flex', flexDirection: "column", paddingBottom: "10px" }}>{errors.title.message}</span>}
+                            {errors.title && <ErrorMessage >{errors.title.message}</ErrorMessage>}
+
+                            <Separator />
 
                             <Label>Descrição:</Label>
                             <Input type="text" placeholder="Descrição" {...register("description")} />
-                            {errors.description && <span style={{ color: "red", display: 'flex', flexDirection: "column", paddingBottom: "10px" }}>{errors.description.message}</span>}
+                            {errors.description && (
+                                <ErrorMessage>{errors.description.message}</ErrorMessage>
+                            )}
+
+                            <Separator />
 
                             <Label>Tamanho:</Label>
                             <Input type="text" placeholder="Tamanho" {...register("size")} />
-                            {errors.size && <span style={{ color: "red", display: 'flex', flexDirection: "column", paddingBottom: "10px" }}>{errors.size.message}</span>}
+                            {errors.size && <ErrorMessage>{errors.size.message}</ErrorMessage>}
+
+                            <Separator />
 
                             <Label>Código:</Label>
                             <Input type="text" placeholder="Código" {...register("code")} />
-                            {errors.code && <span style={{ color: "red", display: 'flex', flexDirection: "column", paddingBottom: "10px" }}>{errors.code.message}</span>}
+                            {errors.code && <ErrorMessage>{errors.code.message}</ErrorMessage>}
+
+                            <Separator />
 
                             <Label>Status:</Label>
-                            <select {...register("status")}>
+                            <Select {...register("status")}>
                                 <option value="">Selecione um status</option>
                                 <option value="disponível">Disponível</option>
                                 <option value="indisponível">Indisponível</option>
-                            </select>
-                            {errors.status && <span style={{ color: "red", display: 'flex', flexDirection: "column", paddingBottom: "10px" }}>{errors.status.message}</span>}
+                            </Select>
 
-                            <Button type="submit">Salvar</Button>
+                            <Separator />
+
+                            {errors.status && <ErrorMessage>{errors.status.message}</ErrorMessage>}
+                            <AjustButton>
+                                <Button type="submit">Salvar</Button>
+                            </AjustButton>
                         </form>
                     </PopupContent>
                 </PopupContainer>

@@ -57,18 +57,55 @@ export const Input = styled.input`
 `
 
 export const Button = styled.button`
-  padding: 20px 30px;
+  display: flex;
+  align-items: center;
+
+  padding: 10px 20px;
   background-color: #fff;
   color: #000;
+
   border: none;
   border-radius: 10px;
-  cursor: pointer;
   font-size: 16px;
   font-weight: bold;
-  margin-left: 90px;
-  margin-top: 30px;
+  margin-top: 15px;
 
   &:hover {
     background-color: #ddd;
   }
+`
+
+export const ErrorMessage = styled.span`
+  color: red;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 10px;
+`
+
+export const Select = styled.select`
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    border-color: #007bff;
+    outline: none;
+  }
+
+  option {
+    background-color: #fff;
+    color: #333;
+  }
+`
+export const AjustButton = styled.div`
+  display: flex;
+  justify-content: center;
+`
+export const Separator = styled.div`
+  padding: 0.3rem;
 `

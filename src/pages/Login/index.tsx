@@ -96,7 +96,7 @@ export default function Login() {
                     </Header>
                     <Body>
                         <label>
-                            <h3 style={{ color: "white" }}>Usuário</h3>
+                            <h3 style={{ color: "white" }}>CPF</h3>
                             <InputLogin type="text" register={register("cpf")} id="input" />
                             {errors.cpf && <p style={{ color: "red" }}>{errors.cpf.message}</p>}
                         </label>

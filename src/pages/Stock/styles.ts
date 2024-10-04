@@ -7,7 +7,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: row;
   background: #5a5a5a;
-  overflow: hidden;
+  overflow-x: hidden;
 `
 
 export const ContainerContent = styled.div`
