@@ -21,7 +21,7 @@ export const UpdatePopUp = async (vestido: Dress, token: string) => {
         if (axios.isAxiosError(error)) {
             toast.error("Erro ao atualizar o vestido:", error.response?.data || error.message);
         } else {
-            console.error("Erro desconhecido:", error);
+            toast.error("Erro desconhecido.");
         }
         throw new Error("Erro ao atualizar o vestido");
     }

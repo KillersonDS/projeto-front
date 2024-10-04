@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const API_URL = "https://roseanne-dias-aluguel.onrender.com/stock";
 
@@ -24,8 +25,9 @@ export const CreatePopUp = async (
         });
 
         return response.data;
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-        console.error("Erro ao criar o produto:", error);
+        toast.error("Erro ao criar o produto");
         throw new Error("Erro ao criar o produto");
     }
 };

@@ -52,9 +52,9 @@ export default function DressPopupEdit({ vestido, onClose, onUpdate }: DressPopu
             };
 
             await UpdatePopUp(updatedVestido, token);
-            onUpdate(updatedVestido); // Atualiza a lista de vestidos no componente pai
+            onUpdate(updatedVestido);
             toast.success('Produto editado com sucesso!');
-            onClose(); // Fecha o pop-up após edição
+            onClose();
             reset();
         } catch (error) {
             toast.error('Erro ao editar o produto: ' + (error instanceof Error ? error.message : "Erro desconhecido"));
@@ -69,23 +69,23 @@ export default function DressPopupEdit({ vestido, onClose, onUpdate }: DressPopu
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <Label>Nome:</Label>
                     <Input type="text" {...register("title")} />
-                    {errors.title && <span>{errors.title.message}</span>}
+                    {errors.title && <span style={{ color: "red" }}>{errors.title.message}</span>}
 
                     <Label>Descrição:</Label>
                     <Input type="text" {...register("description")} />
-                    {errors.description && <span>{errors.description.message}</span>}
+                    {errors.description && <span style={{ color: "red" }}>{errors.description.message}</span>}
 
                     <Label>Tamanho:</Label>
                     <Input type="text" {...register("size")} />
-                    {errors.size && <span>{errors.size.message}</span>}
+                    {errors.size && <span style={{ color: "red" }}>{errors.size.message}</span>}
 
                     <Label>Código:</Label>
                     <Input type="text" {...register("code")} />
-                    {errors.code && <span>{errors.code.message}</span>}
+                    {errors.code && <span style={{ color: "red" }}>{errors.code.message}</span>}
 
                     <Label>Status:</Label>
                     <Input type="text" {...register("status")} />
-                    {errors.status && <span>{errors.status.message}</span>}
+                    {errors.status && <span style={{ color: "red" }}>{errors.status.message}</span>}
 
                     <Button type="submit">Salvar</Button>
                 </form>
