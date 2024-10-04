@@ -1,4 +1,4 @@
-import { PopupContainer, PopupContent, Input, Label, ErrorMessage, AjustButton, Separator, Button, CloseButton } from './styles';
+import { PopupContainer, PopupContent, Input, Label, ErrorMessage, AjustButton, Separator, Button, CloseButton, SelectEdit } from './styles';
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -92,8 +92,11 @@ export default function DressPopupEdit({ vestido, onClose, onUpdate }: DressPopu
                     <Separator />
 
                     <Label>Status:</Label>
-                    <Input type="text" {...register("status")} />
-                    {errors.status && <ErrorMessage style={{ color: "red" }}>{errors.status.message}</ErrorMessage>}
+                    <SelectEdit {...register("status")}>
+                        <option value="">Selecione um status</option>
+                        <option value="disponível">Disponível</option>
+                        <option value="indisponível">Indisponível</option>
+                    </SelectEdit>
 
                     <Separator />
                     <AjustButton>

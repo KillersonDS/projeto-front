@@ -31,6 +31,7 @@ export const ContainerLeft = styled.div`
   height: 100%;
   padding: 20px;
   overflow-y: auto;
+  overflow-x: hidden;
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -58,7 +59,7 @@ export const ContainerLeft = styled.div`
   @media (max-width: 1075px) {
     font-size: 11px;
   }
-`
+`;
 
 export const ContainerRight = styled.div`
   display: flex;
