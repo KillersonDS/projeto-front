@@ -10,7 +10,8 @@ export const InformationDataContainer = styled.div`
 
   @media (max-width: 768px) {
     display: flex;
-    width: 100%;
+    flex-direction: column;
+    width: 150%;
     height: 190px;
   }
 `
@@ -28,7 +29,7 @@ export const Information = styled.div`
     padding: 10px 0px 0px 10px;
 
     h3 {
-      font-size: 12px;
+      font-size: 15px;
     }
   }
 `
@@ -39,6 +40,12 @@ export const InformationImage = styled.div`
   background-color: white;
   border-radius: 20px;
   padding: 15px;
+
+  @media (max-width: 768px) {
+    display: flex;
+    width: 60%;
+    height: 100%;
+  }
 `
 
 export const Image = styled.div`
@@ -48,6 +55,8 @@ export const Image = styled.div`
   align-items: flex-start;
   gap: 10px;
   margin-right: 6%;
+  margin-left: 330px;
+  
 
   @media (max-width: 768px) {
     img {
